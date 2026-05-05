@@ -1,0 +1,268 @@
+.where-page {
+  min-height: 100vh;
+  padding: 40px 0 70px;
+  overflow: hidden;
+}
+
+.where-hero {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* QUESTO è il punto chiave */
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.where-hero h1 {
+  font-size: clamp(42px, 7vw, 88px);
+  line-height: 0.92;
+  margin: 10px auto 0;
+  font-weight: 900;
+  letter-spacing: -0.07em;
+  text-align: center;
+}
+
+.where-hero .eyebrow {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.where-hero p {
+  color: var(--muted);
+  font-size: 20px;
+}
+
+.locations-carousel-section {
+  position: relative;
+  min-height: 820px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  perspective: 1800px;
+}
+
+.locations-carousel {
+  position: relative;
+  width: min(1250px, 88vw);
+  height: 650px;
+  transform-style: preserve-3d;
+}
+
+.location-slide {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: 1.1fr 1.3fr;
+  gap: 26px;
+
+  padding: 28px;
+  border-radius: 34px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(20, 22, 28, 0.98),
+    rgba(8, 9, 11, 0.98)
+  );
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 45px 120px rgba(0, 0, 0, 0.72);
+
+  opacity: 0;
+  pointer-events: none;
+
+  transform: translateX(0) translateZ(-400px) scale(0.7) rotateY(0deg);
+
+  transition:
+    transform 0.65s cubic-bezier(0.2, 0.8, 0.2, 1),
+    opacity 0.65s ease,
+    filter 0.65s ease;
+}
+
+.location-slide.active {
+  opacity: 1;
+  z-index: 5;
+  pointer-events: auto;
+
+  transform: translateX(0) translateZ(0) scale(1) rotateY(0deg);
+
+  filter: none;
+}
+
+.location-slide.prev {
+  opacity: 0.35;
+  z-index: 3;
+
+  transform: translateX(-48%) translateZ(-260px) scale(0.78) rotateY(34deg);
+
+  filter: blur(1px);
+}
+
+.location-slide.next {
+  opacity: 0.35;
+  z-index: 3;
+
+  transform: translateX(48%) translateZ(-260px) scale(0.78) rotateY(-34deg);
+
+  filter: blur(1px);
+}
+
+.location-info {
+  padding: 12px 4px 12px 8px;
+  overflow: visible;
+}
+
+.location-info span {
+  display: inline-block;
+  color: var(--accent2);
+  background: rgba(247, 181, 0, 0.14);
+  padding: 8px 13px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.location-info h2 {
+  font-size: clamp(28px, 3vw, 44px);
+  line-height: 1;
+  margin: 18px 0 6px;
+  letter-spacing: -0.04em;
+}
+
+.location-info h3 {
+  margin: 0 0 18px;
+  color: var(--muted);
+  font-size: clamp(16px, 1.2vw, 18px);
+}
+
+.location-info ul {
+  padding-left: 18px;
+  margin: 0 0 20px;
+}
+
+.location-info li,
+.location-info p {
+  color: var(--muted);
+  line-height: 1.45;
+  font-size: 15px;
+}
+
+.location-info li {
+  margin-bottom: 6px;
+}
+
+.location-info b {
+  color: var(--text);
+}
+
+.location-map {
+  overflow: hidden;
+  border-radius: 28px;
+  min-height: 100%;
+  background: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.location-map iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  filter: none;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  z-index: 20;
+
+  width: 58px;
+  height: 58px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+
+  background: rgba(0, 0, 0, 0.82);
+  color: white;
+
+  font-size: 48px;
+  line-height: 1;
+  cursor: pointer;
+
+  transform: translateY(-50%);
+  transition: 0.25s ease;
+}
+
+.carousel-btn:hover {
+  background: var(--accent);
+  transform: translateY(-50%) scale(1.08);
+}
+
+.carousel-btn.prev {
+  left: clamp(10px, 3vw, 42px);
+}
+
+.carousel-btn.next {
+  right: clamp(10px, 3vw, 42px);
+}
+
+@media (max-width: 1100px) {
+  .locations-carousel {
+    width: 100%;
+    height: 760px;
+  }
+
+  .location-slide {
+    grid-template-columns: 1fr;
+  }
+
+  .location-map {
+    height: 360px;
+  }
+}
+
+@media (max-width: 700px) {
+  .where-page {
+    padding: 42px 18px;
+  }
+
+  .locations-carousel-section {
+    min-height: auto;
+  }
+
+  .locations-carousel {
+    height: auto;
+  }
+
+  .location-slide,
+  .location-slide.active,
+  .location-slide.prev,
+  .location-slide.next {
+    position: relative;
+    display: none;
+    transform: none;
+    opacity: 1;
+    filter: none;
+  }
+
+  .location-slide.active {
+    display: grid;
+  }
+
+  .carousel-btn {
+    top: auto;
+    bottom: -78px;
+  }
+
+  .carousel-btn.prev {
+    left: 30%;
+  }
+
+  .carousel-btn.next {
+    right: 30%;
+  }
+}
